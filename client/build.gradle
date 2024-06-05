@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+mainClassName = 'client.tank.ClientMain'
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': mainClassName
+        )
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'log4j:log4j:1.2.17'
+    implementation 'com.esotericsoftware:kryonet:2.22.0-RC1'
+
+    // LibGDX core and backend dependencies
+    implementation 'com.badlogicgames.gdx:gdx:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-backend-headless:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-platform:1.9.14:natives-desktop'
+    implementation 'com.badlogicgames.gdx:gdx-box2d:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-box2d-platform:1.9.14:natives-desktop'
+    implementation 'com.badlogicgames.gdx:gdx-freetype:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-freetype-platform:1.9.14:natives-desktop'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
